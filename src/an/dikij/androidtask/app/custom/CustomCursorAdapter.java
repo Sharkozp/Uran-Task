@@ -1,4 +1,4 @@
-package an.dikij.androidtask;
+package an.dikij.androidtask.app.custom;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,7 +21,7 @@ public class CustomCursorAdapter extends SimpleCursorAdapter {
 		super(context, layout, c, from, to);
 	}
 
- static class ViewBinderImpl implements ViewBinder {		
+ public static class ViewBinderImpl implements ViewBinder {		
 		
 		@Override
 		public boolean setViewValue(View view, Cursor cursor, int columnIndex) {

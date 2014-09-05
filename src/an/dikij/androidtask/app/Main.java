@@ -1,9 +1,12 @@
-package an.dikij.androidtask;
+package an.dikij.androidtask.app;
 
 import java.util.Date;
 import java.util.Random;
 
-import an.dikij.androidtask.app.R;
+import an.dikij.androidtask.app.custom.ConnectionClass;
+import an.dikij.androidtask.app.custom.CustomCursorAdapter;
+import an.dikij.androidtask.app.custom.CustomOnItemClickListener;
+import an.dikij.androidtask.app.custom.DBHelper;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -47,7 +50,7 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
 
 		Button downloadButton = (Button) findViewById(R.id.downloadButton);
 		downloadButton.setOnClickListener(this);
-		db.close();
+		dataList.setOnItemClickListener(new CustomOnItemClickListener(this));
 	}
 
 	@Override
@@ -58,7 +61,7 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
 					gen.nextInt(MAX_COLOR), gen.nextInt(MAX_COLOR)));
 			break;
 		case R.id.downloadButton:
-			DBHelper db = new DBHelper(this);
+			db = new DBHelper(this);
 			long date = new Date().getTime();
 
 			String response = connectionClass.connect(date);

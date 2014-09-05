@@ -1,4 +1,4 @@
-package an.dikij.androidtask;
+package an.dikij.androidtask.app.custom;
 
 import android.util.Log;
 
@@ -51,14 +51,14 @@ public class ConnectionClass {
                 }
             }
         } catch (ClientProtocolException e) {
-            Log.e("ME", e.toString());
+            Log.e("UTExseption", e.toString());
         } catch (IOException e) {
-            Log.e("ME", e.toString());
+            Log.e("UTExseption", e.toString());
         } finally {
             try {
                 is.close();
             } catch (IOException e) {
-                Log.e("ME", e.toString());
+                Log.e("UTExseption", e.toString());
             }
         }
         return result.toString();

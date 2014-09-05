@@ -4,6 +4,9 @@
     <string name="app_name">AndroidTask</string>
     <string name="change_button">Change background color</string>
     <string name="download_button">Download testing data</string>
+    <string name="back_button">Back</string>
     <string name="received_data_string">(received data)</string>
+    <string name="title_activity_data">Data</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
