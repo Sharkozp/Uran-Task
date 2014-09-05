@@ -15,9 +15,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.Timestamp;
-import java.util.Date;
 
+/**
+ * Created by Oleksandr Dykyi.
+ */
 public class ConnectionClass {
     private HttpClient client;
     private HttpGet get;
@@ -28,11 +29,10 @@ public class ConnectionClass {
         client = new DefaultHttpClient(httpParameters);
     }
 
-    public String connect(Timestamp date) {
-        Log.i("ME", URL);
+    public String connect(long date) {
         StringBuilder result = new StringBuilder();
         StringBuilder newUrl = new StringBuilder();
-        newUrl.append(URL).append("?").append(date.getTime());
+        newUrl.append(URL).append("?").append("time=").append(date);
 
         get = new HttpGet(newUrl.toString());
         InputStream is = null;
