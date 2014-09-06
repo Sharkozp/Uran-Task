@@ -1,10 +1,10 @@
 package an.dikij.androidtask.app;
 
-import an.dikij.androidtask.app.custom.DBHelper;
+import an.dikij.androidtask.app.custom.CustomActionBarActivity;
+import an.dikij.androidtask.app.system.DBHelper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -12,7 +12,7 @@ import android.widget.ListView;
 /**
  * Created by Oleksandr Dykyi.
  */
-public class Data extends ActionBarActivity {
+public class Data extends CustomActionBarActivity {
 	private SimpleCursorAdapter adapter;	
 	private DBHelper db;
 	private long id;	
@@ -38,5 +38,5 @@ public class Data extends ActionBarActivity {
 				db.getRecordById(id), from, to, 0);
 		dataList.setAdapter(adapter);
 		db.close();
-	}	
+	}
 }

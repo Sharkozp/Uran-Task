@@ -4,15 +4,15 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-import an.dikij.androidtask.app.custom.ConnectionClass;
+import an.dikij.androidtask.app.custom.CustomActionBarActivity;
 import an.dikij.androidtask.app.custom.CustomCursorAdapter;
 import an.dikij.androidtask.app.custom.CustomOnItemClickListener;
-import an.dikij.androidtask.app.custom.DBHelper;
+import an.dikij.androidtask.app.system.ConnectionClass;
+import an.dikij.androidtask.app.system.DBHelper;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,10 +22,9 @@ import android.widget.RelativeLayout;
 /**
  * Created by Oleksandr Dykyi.
  */
-public class Main extends ActionBarActivity implements View.OnClickListener {
-	private static final int MAX_COLOR = 255;
-	private Random gen = new Random();	
-	private RelativeLayout myLayout;
+public class Main extends CustomActionBarActivity implements View.OnClickListener {
+	private static final int MAX_COLOR = 255;	
+	private Random gen = new Random();
 	private SimpleCursorAdapter adapter;
 	private DBHelper db;
 
@@ -33,11 +32,10 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
-		myLayout = (RelativeLayout) findViewById(R.id.myLayout);
+		
 		Button changeButton = (Button) findViewById(R.id.changeButton);
 		changeButton.setOnClickListener(this);
-				
+
 		ListView dataList = (ListView) findViewById(R.id.dataList);
 		String[] from = new String[] { "_id", "request" };
 		int[] to = new int[] { R.id.idText, R.id.itemText };
@@ -59,6 +57,7 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.changeButton:
+			RelativeLayout myLayout = (RelativeLayout) findViewById(R.id.myLayout);
 			myLayout.setBackgroundColor(Color.rgb(gen.nextInt(MAX_COLOR),
 					gen.nextInt(MAX_COLOR), gen.nextInt(MAX_COLOR)));
 			break;
@@ -82,7 +81,7 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
 	}
 	
 	private String getResponse(long date) {
-		ConnectionClass connectionClass = new ConnectionClass();
+		ConnectionClass connectionClass = new ConnectionClass(this);
 		connectionClass.execute(date);
 		String response = null;
 		try {
@@ -93,5 +92,5 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
 			Log.e("UTException", e.toString());
 		}
 		return response;
-	}
+	}	
 }
