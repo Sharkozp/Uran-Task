@@ -29,14 +29,14 @@ public class Data extends ActionBarActivity {
 			}
 		});
 		
-		db = new DBHelper(this);
 		ListView dataList = (ListView) findViewById(R.id.dataDetail);
 		String[] from = new String[] { "response" };
 		int[] to = new int[] { R.id.dataText };
+		
+		db = new DBHelper(this);
 		adapter = new SimpleCursorAdapter(this, R.layout.datadetail,
-				db.getRecord(id), from, to, 0);
-			
+				db.getRecordById(id), from, to, 0);
 		dataList.setAdapter(adapter);
 		db.close();
-	}
+	}	
 }

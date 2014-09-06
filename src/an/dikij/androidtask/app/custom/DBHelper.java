@@ -10,18 +10,22 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Oleksandr Dykyi.
  */
 public class DBHelper extends SQLiteOpenHelper {
+	private static final String DB_NAME = "myDB";
 	private static final String TABLE_NAME = "mytable";
 	private static final String SQL_STRING = "create table mytable(_id INTEGER PRIMARY KEY AUTOINCREMENT, request datetime DEFAULT CURRENT_TIMESTAMP, response TEXT);";
 	private SQLiteDatabase db;
 	private ContentValues values;
 
 	public DBHelper(Context context) {
-		super(context, "myDB", null, 1);
+		super(context, DB_NAME, null, 1);
 	}
 
+	
+	/**
+	 * Create database table with rows
+	 */
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// create database table with rows
 		db.execSQL(SQL_STRING);
 	}
 
@@ -29,6 +33,11 @@ public class DBHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 	}
 
+	/**
+	 * Add new row in table
+	 * @param date
+	 * @param response
+	 */
 	public void addData(long date, String response) {
 		db = this.getWritableDatabase();
 		values = new ContentValues();
@@ -38,6 +47,10 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 
+	/**
+	 * Return all saved data from the table
+	 * @return @see Cursor
+	 */
 	public Cursor getAllRecords() {
 		db = this.getWritableDatabase();
 		String query = "SELECT  * FROM mytable Order BY _id DESC";
@@ -46,7 +59,11 @@ public class DBHelper extends SQLiteOpenHelper {
 		return cursor;
 	}
 
-	public Cursor getRecord(long id) {
+	/**
+	 * Return saved record by id from the table
+	 * @return @see Cursor
+	 */
+	public Cursor getRecordById(long id) {
 		db = this.getWritableDatabase();
 		String query = "SELECT  * FROM mytable where _id = ?";
 		Cursor cursor = db.rawQuery(query, new String[] { String.valueOf(id) });
