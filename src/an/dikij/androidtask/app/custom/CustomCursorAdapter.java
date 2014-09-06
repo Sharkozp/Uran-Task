@@ -6,19 +6,18 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 /**
  * Created by Oleksandr Dykyi.
  */
 public class CustomCursorAdapter extends SimpleCursorAdapter {
-	// TODO Change deprecated @see SimpleCursorAdapter
-	@SuppressWarnings("deprecation")
+	
 	public CustomCursorAdapter(Context context, int layout, Cursor c, String[] from,
-			int[] to) {
-		super(context, layout, c, from, to);
+			int[] to, int flag) {
+		super(context, layout, c, from, to, flag);
 	}
 
  public static class ViewBinderImpl implements ViewBinder {		

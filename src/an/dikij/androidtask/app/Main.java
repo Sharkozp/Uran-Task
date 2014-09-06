@@ -10,12 +10,12 @@ import an.dikij.androidtask.app.custom.DBHelper;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.SimpleCursorAdapter;
 
 /**
  * Created by Oleksandr Dykyi.
@@ -43,7 +43,7 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
 		int[] to = new int[] { R.id.idText, R.id.itemText };		
 
 		adapter = new CustomCursorAdapter(this, R.layout.item,
-				db.getAllRecords(), from, to);
+				db.getAllRecords(), from, to, 0);
 
 		adapter.setViewBinder(new CustomCursorAdapter.ViewBinderImpl());		
 		dataList.setAdapter(adapter);
@@ -51,6 +51,7 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
 		Button downloadButton = (Button) findViewById(R.id.downloadButton);
 		downloadButton.setOnClickListener(this);
 		dataList.setOnItemClickListener(new CustomOnItemClickListener(this));
+		db.close();
 	}
 
 	@Override
@@ -76,6 +77,7 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
 	protected void onResume() {
 		Cursor cursor = db.getAllRecords();
 		adapter.changeCursor(cursor);
+		db.close();
 		super.onResume();
 	}
 }

@@ -3,11 +3,11 @@ package an.dikij.androidtask.app;
 import an.dikij.androidtask.app.custom.DBHelper;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
 /**
  * Created by Oleksandr Dykyi.
@@ -15,9 +15,8 @@ import android.widget.SimpleCursorAdapter;
 public class Data extends ActionBarActivity {
 	private SimpleCursorAdapter adapter;	
 	private DBHelper db;
-	private long id;
+	private long id;	
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,11 +32,11 @@ public class Data extends ActionBarActivity {
 		db = new DBHelper(this);
 		ListView dataList = (ListView) findViewById(R.id.dataDetail);
 		String[] from = new String[] { "response" };
-		int[] to = new int[] { R.id.dataText };		
-		// TODO Change deprecated @see SimpleCursorAdapter
+		int[] to = new int[] { R.id.dataText };
 		adapter = new SimpleCursorAdapter(this, R.layout.datadetail,
-				db.getRecord(id), from, to);
+				db.getRecord(id), from, to, 0);
 			
 		dataList.setAdapter(adapter);
+		db.close();
 	}
 }

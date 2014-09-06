@@ -42,7 +42,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		db = this.getWritableDatabase();
 		String query = "SELECT  * FROM mytable Order BY _id DESC";
 		Cursor cursor = db.rawQuery(query, null);
-
+		
 		return cursor;
 	}
 
@@ -50,7 +50,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		db = this.getWritableDatabase();
 		String query = "SELECT  * FROM mytable where _id = ?";
 		Cursor cursor = db.rawQuery(query, new String[] { String.valueOf(id) });
-
+		
 		return cursor;
 	}
 }
